@@ -133,49 +133,38 @@ public class MainActivity extends AppCompatActivity {
         String currentText;
         MaterialButton button = (MaterialButton) view;
         String btnText = button.getText().toString();
-        if(checkClickEqual && checkBack) {
-            checkBack=false;
+
+        if(checkClickEqual) {
+            checkClickEqual = false;
+            checkBack = false;
             textView1.setTextSize(42);
             textView2.setTextSize(28);
             textView1.setTextAppearance(R.style.changeDigit_tv1);
             textView2.setTextAppearance(R.style.changeDigit_tv2);
-            // Determine the current theme mode
-            //int nightMode = AppCompatDelegate.getDefaultNightMode();
 
-            // Set text color based on the theme mode
-//            if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-//                // Dark mode
-//                textView2.setTextColor(ContextCompat.getColor(this, R.color.color_custom2));
-//                textView1.setTextColor(Color.WHITE);
-//            } else {
-//                // Light mode
-//                textView2.setTextColor(ContextCompat.getColor(this, R.color.color_custom1));
-//                textView1.setTextColor(Color.BLACK);
-//            }
-            checkClickEqual=false;
-            currentText=textView2.getText().toString();
-            textView1.setText(currentText);
-        }
-        else {
+            // Update currentText from textView2's result
+            currentText = textView2.getText().toString();
+            textView1.setText(currentText + btnText);
+            textView2.setText(""); // Clear textView2 since we're now in the middle of a new operation
+        } else {
             currentText = textView1.getText().toString();
-
-        }
-        if (currentText.isEmpty() && btnText.equals("−")) {
-            currentText = "−";
-            textView1.setText(currentText);
-        } else if (!currentText.isEmpty()) {
-            char lastChar = currentText.charAt(currentText.length() - 1);
-            if (lastChar == '+' || lastChar == '−' || lastChar == '×' || lastChar == '÷') {
-                currentText = currentText.substring(0, currentText.length() - 1) + btnText;
-            } else {
-                currentText += btnText;
+            if (currentText.isEmpty() && btnText.equals("−")) {
+                // Handle the case where a negative sign is being added at the beginning
+                currentText = "−";
+            } else if (!currentText.isEmpty()) {
+                // Handle replacing the last operator with the new one
+                char lastChar = currentText.charAt(currentText.length() - 1);
+                if (lastChar == '+' || lastChar == '−' || lastChar == '×' || lastChar == '÷') {
+                    currentText = currentText.substring(0, currentText.length() - 1) + btnText;
+                } else {
+                    currentText += btnText;
+                }
             }
             textView1.setText(currentText);
-            setOp = true;
-            textView2.setText("");
+            textView2.setText(""); // Clear textView2 for new result
         }
+        setOp = true;
     }
-
     public void onPercentageClick(View view) {
         String currentText = textView1.getText().toString();
         if(checkClickEqual) {
@@ -227,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void onEqualClick(View view) {
+
         String text = textView1.getText().toString();
         double result = calculate(text);
         String t = Double.toString(result);
@@ -339,11 +329,6 @@ public class MainActivity extends AppCompatActivity {
                         numbers.push(num);
                     }
                 }
-            } else if (ch == '+' || ch == '-') {
-                while (!operators.isEmpty() && (operators.peek() == '*' || operators.peek() == '/')) {
-                    performOperation(numbers, operators);
-                }
-                operators.push(ch);
             }
         }
 
