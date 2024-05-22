@@ -320,17 +320,30 @@ public class MainActivity extends AppCompatActivity {
                 }
                 operators.push(ch);
             } else if (ch == '%') {
-                if (!numbers.isEmpty()) {
-                    double num = numbers.pop() / 100;
-                    if (!numbers.isEmpty() && !operators.isEmpty()) {
-                        char prevOp = operators.peek();
-                        if (prevOp == '+' || prevOp == '−') {
-                            performOperation(numbers, operators);
-                            num = numbers.pop() * num;
-                        }
+                if (i + 1 < expression.length() && Character.isDigit(expression.charAt(i + 1))) {
+                    // Check if next character is a number
+                    double secondNum = Character.getNumericValue(expression.charAt(i + 1));
+                    double firstNum = numbers.pop();
+                    double result = firstNum * (secondNum / 100);
+                    numbers.push(result);
+                    i++; // Skip the second number (already processed)
+                } else {
+                    double num = numbers.pop();
+                    if (!operators.isEmpty() && (operators.peek() == '*' || operators.peek() == '/')) {
+                        char op = operators.pop();
+                        double prevNum = numbers.pop();
+                        double result = (op == '*') ? prevNum * (num / 100) : prevNum / (num / 100);
+                        numbers.push(result);
+                    } else {
+                        num = num / 100;
+                        numbers.push(num);
                     }
-                    numbers.push(num);
                 }
+            } else if (ch == '+' || ch == '-') {
+                while (!operators.isEmpty() && (operators.peek() == '*' || operators.peek() == '/')) {
+                    performOperation(numbers, operators);
+                }
+                operators.push(ch);
             }
         }
 
