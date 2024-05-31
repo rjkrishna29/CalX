@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CalX</string>
+    <string name="about">Made With ❤️ by Ritabrato Pani</string>
+    <string name="Email">Email id: ritabratopani29@gmail.com</string>
 </resources>

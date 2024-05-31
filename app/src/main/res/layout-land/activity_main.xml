@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    style="@style/Base.Theme.CalX.Fullscreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:paddingHorizontal="10sp"
+        android:text=""
+        android:textAlignment="viewEnd"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:paddingHorizontal="10sp"
+        android:text=""
+        android:textAlignment="viewEnd"
+        android:textSize="24sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/line"
+        style="@style/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="6dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutVertical"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutHorizontal2"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAC"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="top"
+                android:onClick="onACClick"
+                android:text="AC"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/braOpen"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="top"
+                android:onClick="onDigitClick"
+                android:text="  ("
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/braClose"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="top"
+                android:onClick="onDigitClick"
+                android:text="  )"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="@style/btnBack"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="top"
+                android:onClick="onBackClick"
+                android:textAlignment="gravity"
+                app:cornerRadius="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutHorizontal3"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn6"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="6"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn7"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="7"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn8"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="8"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn9"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="9"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMul"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onOperatorClick"
+                android:text="×"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDiv"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onOperatorClick"
+                android:text="÷"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutHorizontal4"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn2"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="2"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn3"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="3"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn4"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="4"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn5"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="5"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAdd"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onOperatorClick"
+                android:text="+"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSub"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onOperatorClick"
+                android:text="−"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutHorizontal5"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn00"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="00"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn0"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="0"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn1"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="1"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDot"
+                style="@style/digitButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onDigitClick"
+                android:text="."
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPercentage"
+                style="@style/digitButton2"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onPercentageClick"
+                android:text="%"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEqual"
+                style="@style/operatorButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:onClick="onEqualClick"
+                android:text="="
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

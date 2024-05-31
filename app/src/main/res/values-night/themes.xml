@@ -6,7 +6,32 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/black</item>
     </style>
+    <color name="settinglayout">#212121</color>
+    <style name="settings">
+        <item name="cornerRadius">18dp</item>
+        <item name="android:background">@drawable/rounded_corners</item>
+    </style>
+
+    <style name="Base.Theme.CalX.Fullscreen" parent="Base.Theme.CalX">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:background">@color/black</item>
+    </style>
+    <style name="aboutSettings">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="menu_share_icon">
+        <item name="android:drawableLeft">@drawable/baseline_share_23</item>
+    </style>
     <style name="CustomBackgroundStyle">
+        <item name="android:background">@color/black</item>
+    </style>
+    <style name="CustomBackgroundStyleSettings">
         <item name="android:background">@color/black</item>
     </style>
     <style name="changeDigit_tv1">
@@ -40,18 +65,21 @@
         <item name="android:textColor">@color/btnBackground</item>
         <item name="android:backgroundTint">#2E2D2D</item>
     </style>
-    <style name="backSpace" parent="digitButton">
+    <style name="backSpace" >
         <item name="android:drawableLeft">@drawable/baseline_backspace_23</item>
-        <item name="android:backgroundTint">#2E2D2D</item>
+        <item name="android:backgroundTint">@color/black</item>
     </style>
-
+    <style name="btnBack" parent = "digitButton2">
+        <item name="android:drawableLeft">@drawable/baseline_backspace_23</item>
+    </style>
 
     <style name="commonButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
         <item name="android:layout_width">65dp</item>
         <item name="android:layout_height">65dp</item>
         <item name="backgroundTint">#616161</item>
-        <item name="cornerRadius">36dp</item>
+        <item name="cornerRadius">34dp</item>
         <item name="android:textSize">32dp</item>
         <item name="android:layout_margin">12dp</item>
     </style>
+
 </resources>
