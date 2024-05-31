@@ -25,10 +25,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
     </style>
-    <style name="menu_share_icon">
-        <item name="android:drawableLeft">@drawable/baseline_share_23</item>
-    </style>
-    <style name="CustomBackgroundStyle">
+       <style name="CustomBackgroundStyle">
         <item name="android:background">@color/black</item>
     </style>
     <style name="CustomBackgroundStyleSettings">
