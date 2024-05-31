@@ -719,7 +719,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_SUBJECT, "Try this calculator app");
-            intent.putExtra(Intent.EXTRA_TEXT, "Apk is here ");
+            intent.putExtra(Intent.EXTRA_TEXT, "Apk is here : https://drive.google.com/drive/folders/1McJEran4lGcDDscFf9cDDxU6Rz9s4163?usp=drive_link ");
             startActivity(Intent.createChooser(intent, "Share Via"));
             return true;
         } else if (item.getItemId() == R.id.menu_settings) {
