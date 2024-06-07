@@ -725,6 +725,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.menu_settings) {
             Intent settingIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingIntent);
+        } else if(item.getItemId()==R.id.menu_more){
+            Intent moreIntent = new Intent(this, MoreActivity.class);
+            startActivity(moreIntent);
         }
         return super.onOptionsItemSelected(item);
     }

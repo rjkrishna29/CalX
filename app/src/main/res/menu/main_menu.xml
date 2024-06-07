@@ -6,9 +6,13 @@
     <item
         android:id="@+id/menu_settings"
         android:title="Settings" />
-       <item android:id="@+id/menu_share"
-     android:title="Share"
-     android:icon="@drawable/baseline_share_23"/>
+    <item android:id="@+id/menu_share"
+          android:title="Share" />
+    <item android:id="@+id/menu_more"
+           android:title="More"
+        android:icon="@drawable/sharp_widgets_24"
+          app:showAsAction="always"  />
+
 
 
 </menu>

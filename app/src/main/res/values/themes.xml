@@ -4,10 +4,27 @@
         <!-- Customize your light theme here. -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">#F6F6F6</item>
-
     </style>
-
+    <style name="fffffddddd" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#F6F6F6</item>
+    </style>
+    <style name="txtBg">
+        <item name="android:background">#DEDCDC</item>
+    </style>
+    <style name="signButton">
+        <item name="android:backgroundTint">#F6F6F6</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <color name="textBackground">#DEDCDC</color>
     <color name="settinglayout">#FFFFFF</color>
+    <style name="disableButton">
+        <item name="android:textColor">#CCCCCC</item>
+    </style>
+    <style name="enableButton">
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="settings">
         <item name="cornerRadius">18dp</item>
         <item name="android:background">@drawable/rounded_corners</item>
@@ -30,8 +47,9 @@
         <item name="android:drawableLeft">@drawable/baseline_share_23</item>
     </style>
     <style name="CustomBackgroundStyle">
-        <item name="android:background">#F6F6F6</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
+
     <style name="CustomBackgroundStyleSettings">
         <item name="android:background">#E7E7E7</item>
     </style>
@@ -55,7 +73,10 @@
     <style name="view">
         <item name="background">@color/white</item>
     </style>
-    <style name="digitButton" parent="commonButton">
+    <style name="view2">
+        <item name="backgroundColor">@color/black</item>
+    </style>
+        <style name="digitButton" parent="commonButton">
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="digitButton2" parent="commonButton">
@@ -67,7 +88,11 @@
         <item name="android:layout_height">40dp</item>
         <item name="cornerRadius">40dp</item>
         <item name="android:textSize">5sp</item>
-
+    </style>
+    
+    <style name="moreButton">
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="btnBack" parent = "digitButton2">
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
@@ -75,6 +100,10 @@
     <style name="backSpace" >
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
         <item name="android:backgroundTint">#F6F6F6</item>
+    </style>
+    <style name="backSpace2" >
+        <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
     </style>
 
     <style name="commonButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
@@ -86,5 +115,5 @@
         <item name="android:layout_margin">12dp</item>
 
     </style>
-
+<color name="strikeLine">#E7E7E7</color>
 </resources>
