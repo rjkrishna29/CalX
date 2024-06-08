@@ -1,9 +1,7 @@
 package com.example.calx;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,26 +11,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MoreActivity extends AppCompatActivity {
-    public void onNumConvert(View view){
-        Intent numIntent = new Intent(this, NumConActivity.class);
-        startActivity(numIntent);
-    }
-    public void onCurrConvert(View view){
-        Intent currIntent = new Intent(this, CurrConActivity.class);
-        startActivity(currIntent);
-    }
+public class CurrConActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_more);
+        setContentView(R.layout.activity_curr_con);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Not to show the title
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("More Actions"); // Disable default title
+            getSupportActionBar().setTitle("Currency Converter");
         }
+        //EdgeToEdge.enable(this);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -47,5 +40,4 @@ public class MoreActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

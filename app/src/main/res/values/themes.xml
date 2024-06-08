@@ -14,7 +14,7 @@
         <item name="android:background">#DEDCDC</item>
     </style>
     <style name="signButton">
-        <item name="android:backgroundTint">#F6F6F6</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <color name="textBackground">#DEDCDC</color>
@@ -47,7 +47,7 @@
         <item name="android:drawableLeft">@drawable/baseline_share_23</item>
     </style>
     <style name="CustomBackgroundStyle">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#F6F6F6</item>
     </style>
 
     <style name="CustomBackgroundStyleSettings">
