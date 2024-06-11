@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="txtBg">#383838</color>
+<color name="convertBG">#000C0A0A</color>
+    <color name="colour_custom3">#E0E0E0</color>
 </resources>

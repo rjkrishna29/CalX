@@ -71,6 +71,7 @@ public class NumConActivity extends AppCompatActivity {
         hexView.setOnClickListener(this::onHexClick);
         hexDisable();
         l1.setBackgroundColor(getResources().getColor(R.color.txtBg));
+        decView.setTextColor(getResources().getColor(R.color.btnBackground2));
     }
 
     @Override
@@ -204,7 +205,10 @@ public class NumConActivity extends AppCompatActivity {
         octEnable();
         resetBackgroundColors();
         l1.setBackgroundColor(getResources().getColor(R.color.txtBg));
-
+        decView.setTextColor(getResources().getColor(R.color.btnBackground2));
+        binView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        octView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        hexView.setTextColor(getResources().getColor(R.color.colour_custom3));
     }
 
     public void onBinClick(View view) {
@@ -218,6 +222,11 @@ public class NumConActivity extends AppCompatActivity {
         octDisable();
         resetBackgroundColors();
         l2.setBackgroundColor(getResources().getColor(R.color.txtBg));
+        binView.setTextColor(getResources().getColor(R.color.btnBackground2));
+        decView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        octView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        hexView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        
     }
 
     public void onOctClick(View view) {
@@ -231,6 +240,10 @@ public class NumConActivity extends AppCompatActivity {
         octEnable();
         resetBackgroundColors();
         l3.setBackgroundColor(getResources().getColor(R.color.txtBg));
+        octView.setTextColor(getResources().getColor(R.color.btnBackground2));
+        decView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        binView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        hexView.setTextColor(getResources().getColor(R.color.colour_custom3));
     }
 
     public void onHexClick(View view) {
@@ -244,6 +257,10 @@ public class NumConActivity extends AppCompatActivity {
         octEnable();
         resetBackgroundColors();
         l4.setBackgroundColor(getResources().getColor(R.color.txtBg));
+        hexView.setTextColor(getResources().getColor(R.color.btnBackground2));
+        decView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        binView.setTextColor(getResources().getColor(R.color.colour_custom3));
+        octView.setTextColor(getResources().getColor(R.color.colour_custom3));
     }
 
     public void onDigit1Click(View view) {

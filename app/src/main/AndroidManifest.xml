@@ -13,13 +13,16 @@
         android:theme="@style/Theme.CalX"
         tools:targetApi="31">
         <activity
+            android:name=".LenConActivity"
+            android:exported="false" />
+        <activity
             android:name=".CurrConActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NumConActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MoreActivity"
             android:exported="false"

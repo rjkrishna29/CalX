@@ -18,14 +18,19 @@ public class MoreActivity extends AppCompatActivity {
         Intent numIntent = new Intent(this, NumConActivity.class);
         startActivity(numIntent);
     }
+    public  void onLenConvert(View view){
+        Intent lenIntent = new Intent(this, LenConActivity.class);
+        startActivity(lenIntent);
+    }
     public void onCurrConvert(View view){
         Intent currIntent = new Intent(this, CurrConActivity.class);
         startActivity(currIntent);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_more);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

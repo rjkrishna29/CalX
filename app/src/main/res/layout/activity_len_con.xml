@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/CustomBackgroundStyle"
-    tools:context=".CurrConActivity">
+    tools:context=".LenConActivity">
     <!--    this is the toolbar to show the menu-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,44 +16,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/editTextTextMultiLine"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:ems="10"-->
-<!--        android:gravity="center"-->
-<!--        android:inputType="textMultiLine"-->
-<!--        android:text="Developer still working hard to bring new feature.           Thank you!"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--/>-->
-    <LinearLayout
+
+
+        <LinearLayout
+            style="@style/lenConvertPage"
+        android:id="@+id/linearLayout1"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <Spinner
-            android:id="@+id/spinner_from_curr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:id="@+id/spinner1"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="@+id/linearLayout1" />
         <TextView
-            android:id="@+id/curr_accept"
+            android:id="@+id/textView1"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textAlignment="viewEnd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="70dp"
+            android:textColor="@color/btnBackground2"
+            android:textIsSelectable="true"
+            android:gravity="center"
+            android:textSize="22sp"/>
     </LinearLayout>
+    <LinearLayout
+        style="@style/lenConvertPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_marginLeft="15dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spinner1" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="15dp"
+            android:textAlignment="viewEnd"
+            android:gravity="center"
+            android:textIsSelectable="true"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textSize="22sp"/>
+    </LinearLayout>
+
+
+
+<!--    buttons-->
     <LinearLayout
         android:id="@+id/linearLayoutVertical"
         android:layout_width="match_parent"
@@ -73,19 +103,19 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn7"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="7" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn8"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="8" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn9"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="9" />
 
             <com.google.android.material.button.MaterialButton
@@ -108,19 +138,19 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn4"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="4" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn5"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn6"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="6" />
 
             <com.google.android.material.button.MaterialButton
@@ -141,19 +171,19 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn1"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="1" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn2"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="2" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn3"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="3" />
 
             <com.google.android.material.button.MaterialButton
@@ -173,13 +203,13 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDot"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="." />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn0"
                 style="@style/digitButton"
-                android:onClick="onDigit1Click"
+                android:onClick="onDigitClick2"
                 android:text="0" />
 
             <com.google.android.material.button.MaterialButton
@@ -196,6 +226,7 @@
 
         </LinearLayout>
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

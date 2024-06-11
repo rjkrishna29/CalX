@@ -24,8 +24,13 @@
     <style name="settings">
         <item name="cornerRadius">18dp</item>
         <item name="android:background">@drawable/rounded_corners</item>
+        <item name="background">@color/convertBG</item>
     </style>
-
+    <style name="lenConvertPage">
+        <item name="cornerRadius">18dp</item>
+        <item name="android:background">@drawable/rounded_corners</item>
+        <item name="background">@color/convertBG</item>
+    </style>
     <style name="Base.Theme.CalX.Fullscreen" parent="Base.Theme.CalX">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -97,7 +102,7 @@
         <item name="android:drawableLeft">@drawable/baseline_backspace_23</item>
         <item name="android:backgroundTint">@color/black</item>
     </style>
-    <style name="backSpace2" >
+    <style name="backSpace2" parent="digitButton2">
         <item name="android:drawableLeft">@drawable/baseline_backspace_23</item>
         <item name="android:backgroundTint">@color/black</item>
     </style>

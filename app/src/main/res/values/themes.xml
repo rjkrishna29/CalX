@@ -25,6 +25,11 @@
     <style name="enableButton">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="lenConvertPage">
+        <item name="cornerRadius">18dp</item>
+        <item name="android:background">@drawable/rounded_corner_convert</item>
+        <item name="background">@color/convertBG</item>
+    </style>
     <style name="settings">
         <item name="cornerRadius">18dp</item>
         <item name="android:background">@drawable/rounded_corners</item>
@@ -94,14 +99,14 @@
         <item name="backgroundTint">@color/white</item>
         <item name="android:textColor">@color/black</item>
     </style>
-    <style name="btnBack" parent = "digitButton2">
+    <style name="btnBack" parent = "digitButton">
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
     </style>
     <style name="backSpace" >
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
         <item name="android:backgroundTint">#F6F6F6</item>
     </style>
-    <style name="backSpace2" >
+    <style name="backSpace2" parent="digitButton">
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
         <item name="android:backgroundTint">#FFFFFF</item>
     </style>
