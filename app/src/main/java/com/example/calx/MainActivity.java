@@ -669,6 +669,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.button.MaterialButton;
 import java.util.Stack;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView1, textView2;
@@ -845,7 +849,28 @@ public class MainActivity extends AppCompatActivity {
         textView2.setText("");
         checkPercentage = false;
     }
+    public void onCopyClick(View view) {
+        String copy1 = textView1.getText().toString();
+        String copy2 = textView2.getText().toString();
+        String copy3;
+        if (!copy1.isEmpty() && !copy2.equals("NaN")) {
+            copy3 = copy1 + " = " + copy2;
 
+            // Get the clipboard system service
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard != null) {
+                // Create a clip data object to store the copied text
+                ClipData clip = ClipData.newPlainText("Calculator Result", copy3);
+                // Set the clip data to clipboard
+                clipboard.setPrimaryClip(clip);
+                // Notify the user that the text has been copied
+                Toast.makeText(this, "Result copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Result is undefined", Toast.LENGTH_SHORT).show();
+        }
+    }
     public void onBackClick(View view) {
         if (checkClickEqual) {
             textView1.setTextSize(42);

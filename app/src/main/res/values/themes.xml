@@ -106,6 +106,10 @@
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
         <item name="android:backgroundTint">#F6F6F6</item>
     </style>
+    <style name="copyClick" >
+        <item name="android:drawableLeft">@drawable/rounded_content_copy_24</item>
+        <item name="android:backgroundTint">#F6F6F6</item>
+    </style>
     <style name="backSpace2" parent="digitButton">
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
         <item name="android:backgroundTint">#FFFFFF</item>

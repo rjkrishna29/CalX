@@ -1,44 +1,32 @@
 package com.example.calx;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-
-import java.util.List;
 
 public class LenConActivity extends AppCompatActivity {
     private String input, output;
-    private Spinner spinner1, spinner2;
-    private TextView textView1, textView2;
+    private TextView textView1, textView2, popup1,popup2;
     private String[] measures = {"Kilometre(km)", "Metre(m)", "Decimetre(dm)", "Centimetre(cm)",
-                                                "Millimetre(mm)","Micrometre(μm)","Nanometre(nm)","Picometre(pm)",//"Light year(ly)","Parsec(pc)","Lunar Distance(LD)","Astronomical unit(AU)",
-                                                "Inch(in)","Mile(mi)","Foot(ft)","Yard(yd)","Nautical mile(nmi)"};
+            "Millimetre(mm)", "Micrometre(μm)", "Nanometre(nm)", "Picometre(pm)",
+            "Inch(in)", "Mile(mi)", "Foot(ft)", "Yard(yd)", "Nautical mile(nmi)"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_len_con);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -48,47 +36,50 @@ public class LenConActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
-        spinner1 = findViewById(R.id.spinner1);
-        spinner2 = findViewById(R.id.spinner2);
+        popup1 = findViewById(R.id.popup1);
+        popup2 = findViewById(R.id.popup2); // Change to popup2
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(LenConActivity.this, R.layout.item_selected, measures);
-        arrayAdapter.setDropDownViewResource(R.layout.item_selected);
-        spinner1.setAdapter(arrayAdapter);
-        spinner2.setAdapter(arrayAdapter);
+        // Set default measure
+        popup1.setText("Kilometre(km)");
+        input = "Kilometre(km)";
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                input = measures[position];
-                textView2.setText("");
-            }
+        popup2.setText("Kilometre(km)"); // Set default measure for output
+        output = "Kilometre(km)";
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
-            }
-        });
-
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                output = measures[position];
-                textView2.setText("");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
-            }
-        });
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Set click listener to open the popup for input unit
+        popup1.setOnClickListener(this::onPopUp);
+        // Set click listener to open the popup for output unit
+        popup2.setOnClickListener(this::onPopUp);
     }
 
+    // Method to handle popup for input/output unit selection
+    public void onPopUp(View view) {
+        TextView targetTextView = (TextView) view;
+        createPopup(targetTextView);
+    }
+
+    // Method to create and handle popups
+    private void createPopup(TextView targetTextView) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.popup_measures);
+
+        ListView listViewMeasures = dialog.findViewById(R.id.listViewMeasures);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, measures);
+        listViewMeasures.setAdapter(adapter);
+
+        listViewMeasures.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedMeasure = measures[position];
+            targetTextView.setText(selectedMeasure);
+            if (targetTextView == popup1) {
+                input = selectedMeasure;
+            } else {
+                output = selectedMeasure;
+            }
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
     public void onDigitClick2(View view) {
         textView2.setText("");
         MaterialButton digitBtn = (MaterialButton) view;
@@ -97,11 +88,9 @@ public class LenConActivity extends AppCompatActivity {
         text += btnText;
         textView1.setText(text);
     }
-    public void onBackClick(View view) {
-        // Get the current text from textView1
-        String text = textView1.getText().toString();
 
-        // If the text is not empty, remove the last character
+    public void onBackClick(View view) {
+        String text = textView1.getText().toString();
         if (!text.isEmpty()) {
             textView1.setText(text.substring(0, text.length() - 1));
             textView2.setText("");
@@ -125,16 +114,12 @@ public class LenConActivity extends AppCompatActivity {
         }
     }
 
-    // Conversion function
     void calculate(double value, String inputUnit, String outputUnit) {
-        // Convert input value to meters first
         double meters = toMeters(value, inputUnit);
-        // Convert from meters to the desired output unit
         double result = fromMeters(meters, outputUnit);
         textView2.setText(String.valueOf(result));
     }
 
-    // Convert the value to meters
     private double toMeters(double value, String unit) {
         switch (unit) {
             case "Kilometre(km)":
@@ -168,7 +153,6 @@ public class LenConActivity extends AppCompatActivity {
         }
     }
 
-    // Convert the value from meters to the target unit
     private double fromMeters(double value, String unit) {
         switch (unit) {
             case "Kilometre(km)":
@@ -210,6 +194,4 @@ public class LenConActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    }
-
+}

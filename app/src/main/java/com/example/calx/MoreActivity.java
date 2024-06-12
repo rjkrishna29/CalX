@@ -22,10 +22,6 @@ public class MoreActivity extends AppCompatActivity {
         Intent lenIntent = new Intent(this, LenConActivity.class);
         startActivity(lenIntent);
     }
-    public void onCurrConvert(View view){
-        Intent currIntent = new Intent(this, CurrConActivity.class);
-        startActivity(currIntent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
