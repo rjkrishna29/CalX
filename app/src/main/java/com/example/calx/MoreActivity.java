@@ -15,14 +15,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MoreActivity extends AppCompatActivity {
     public void onNumConvert(View view){
-        Intent numIntent = new Intent(this, NumConActivity.class);
-        startActivity(numIntent);
+        Intent intent = new Intent(this, NumConActivity.class);
+        startActivity(intent);
     }
     public  void onLenConvert(View view){
-        Intent lenIntent = new Intent(this, LenConActivity.class);
-        startActivity(lenIntent);
+        Intent intent = new Intent(this, LenConActivity.class);
+        startActivity(intent);
     }
-
+public void onAreaConvert(View view){
+        Intent intent = new Intent(this, AreaConActivity.class);
+        startActivity(intent);
+}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
