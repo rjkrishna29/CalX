@@ -346,7 +346,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBack"
-        style="@style/backSpace2"
+        style="@style/backSpace"
         android:layout_width="75dp"
         android:layout_height="36dp"
         android:layout_margin="0dp"
@@ -357,8 +357,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSign"
         style="@style/signButton"
-        android:layout_width="wrap_content"
-        android:gravity="bottom"
+        android:layout_width="80dp"
+        android:gravity="start"
         android:onClick="onSignClick"
         android:text="+/-"
         android:layout_height="50dp"
@@ -366,4 +366,16 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCopy"
+        style="@style/copyClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:iconTint="@color/btnBackground2"
+
+        android:onClick="onCopyClick"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical"
+        app:layout_constraintStart_toEndOf="@id/btnSign" />
 </androidx.constraintlayout.widget.ConstraintLayout>

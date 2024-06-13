@@ -258,6 +258,16 @@
         </LinearLayout>
     </LinearLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCopy"
+        style="@style/copyClick"
+        android:layout_width="60dp"
+        android:layout_gravity="center"
+        android:layout_height="36dp"
+        android:iconTint="@color/btnBackground2"
+        android:onClick="onCopyClick"
 
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

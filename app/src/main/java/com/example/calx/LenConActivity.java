@@ -1,6 +1,9 @@
 package com.example.calx;
 
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +58,7 @@ public class LenConActivity extends AppCompatActivity {
 
     // Method to handle popup for input/output unit selection
     public void onPopUp(View view) {
+        textView2.setText("");
         TextView targetTextView = (TextView) view;
         createPopup(targetTextView);
     }
@@ -96,7 +101,26 @@ public class LenConActivity extends AppCompatActivity {
             textView2.setText("");
         }
     }
-
+   public void onCopyClick(View view){
+        String from = textView1.getText().toString();
+        String to = textView2.getText().toString();
+        if (!from.isEmpty() && !to.isEmpty()){
+            String copy = input+": "+from+" = "+output+": "+to;
+            // Get the clipboard system service
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard != null) {
+                // Create a clip data object to store the copied text
+                ClipData clip = ClipData.newPlainText("Calculator Result", copy);
+                // Set the clip data to clipboard
+                clipboard.setPrimaryClip(clip);
+                // Notify the user that the text has been copied
+                Toast.makeText(this, "Result copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "To get answer click equal button", Toast.LENGTH_SHORT).show();
+        }
+   }
     public void onACClick(View view) {
         textView1.setText("");
         textView2.setText("");

@@ -1,10 +1,15 @@
 package com.example.calx;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -193,6 +198,28 @@ public class NumConActivity extends AppCompatActivity {
         binView.setText(t);
         octView.setText(t);
         hexView.setText(t);
+    }
+    public void onCopyClick(View view){
+        String d = decView.getText().toString();
+        String b = binView.getText().toString();
+        String o = octView.getText().toString();
+        String h = hexView.getText().toString();;
+        if (!d.isEmpty() && !b.isEmpty() && !o.isEmpty() && !h.isEmpty()){
+            String copy = "Decimal"+": "+d+"\n"+"Binary"+": "+b+"\n"+"Octal"+": "+o+"\n"+"Hexadecimal"+": "+h;
+            // Get the clipboard system service
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard != null) {
+                // Create a clip data object to store the copied text
+                ClipData clip = ClipData.newPlainText("Calculator Result", copy);
+                // Set the clip data to clipboard
+                clipboard.setPrimaryClip(clip);
+                // Notify the user that the text has been copied
+                Toast.makeText(this, "Result copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "To get answer click equal button", Toast.LENGTH_SHORT).show();
+        }
     }
     public void onDecClick(View view) {
         decClick = true;

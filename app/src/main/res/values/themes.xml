@@ -14,7 +14,7 @@
         <item name="android:background">#DEDCDC</item>
     </style>
     <style name="signButton">
-        <item name="android:backgroundTint">#FFFFFF</item>
+        <item name="android:backgroundTint">#F6F6F6</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <color name="textBackground">#DEDCDC</color>
@@ -112,7 +112,7 @@
     </style>
     <style name="backSpace2" parent="digitButton">
         <item name="android:drawableLeft">@drawable/baseline_backspace_24</item>
-        <item name="android:backgroundTint">#FFFFFF</item>
+        <item name="android:backgroundTint">#F6F6F6</item>
     </style>
 
     <style name="commonButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">

@@ -108,7 +108,7 @@
     </style>
     <style name="backSpace2" parent="digitButton2">
         <item name="android:drawableLeft">@drawable/baseline_backspace_23</item>
-        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:backgroundTint">#2E2D2D</item>
     </style>
     <style name="btnBack" parent = "digitButton2">
         <item name="android:drawableLeft">@drawable/baseline_backspace_23</item>
