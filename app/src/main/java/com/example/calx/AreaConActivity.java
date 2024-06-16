@@ -37,7 +37,7 @@ public class AreaConActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Length Converter");
+            getSupportActionBar().setTitle("Area Converter");
         }
         textView1=findViewById(R.id.textView1);
         textView2=findViewById(R.id.textView2);
