@@ -8,61 +8,81 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    this is the toolbar to show the menu-->
+    <!--    this is the toolbar to show the menu-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-
-    <TextView
-        android:id="@+id/textView1"
-        style="@style/Text"
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:paddingHorizontal="10sp"
-        android:text=""
-        android:textAlignment="viewEnd"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@id/textView2"
+        android:layout_height="196dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCopy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/Text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="50dp"
-        android:paddingHorizontal="10sp"
-        android:text=""
-        android:textAlignment="viewEnd"
-        android:textSize="24sp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        app:layout_constraintBottom_toTopOf="@+id/line"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@android:color/transparent"
+                android:cursorVisible="true"
+                android:paddingHorizontal="10dp"
+                android:textAlignment="viewEnd"
+                android:textCursorDrawable="@drawable/cutom_cursor"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/Text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:paddingHorizontal="10sp"
+                android:text=""
+                android:textAlignment="viewEnd"
+                android:textSize="24sp"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+    </ScrollView>
+
 
     <View
         android:id="@+id/line"
         style="@style/view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginBottom="6dp"
 
-        app:layout_constraintBottom_toBottomOf="@id/textView2"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical" />
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayoutVertical"
         android:layout_width="356dp"
-        android:layout_height="450dp"
+        android:layout_height="435dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -254,8 +274,8 @@
         android:id="@+id/btnCopy"
         style="@style/copyClick"
         android:layout_width="60dp"
-        android:layout_gravity="center"
         android:layout_height="36dp"
+        android:layout_gravity="center"
         android:iconTint="@color/btnBackground2"
         android:onClick="onCopyClick"
 

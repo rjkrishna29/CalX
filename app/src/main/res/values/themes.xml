@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CalX" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">#F6F6F6</item>
     </style>
@@ -123,6 +124,10 @@
         <item name="android:textSize">32dp</item>
         <item name="android:layout_margin">12dp</item>
 
+    </style>
+
+    <style name="PopupMenu" parent="ThemeOverlay.AppCompat">
+        <item name="android:background">#F6F6F6</item>
     </style>
 <color name="strikeLine">#E7E7E7</color>
 </resources>
