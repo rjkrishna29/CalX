@@ -1,0 +1,11 @@
+<!--&lt;!&ndash; res/anim/stay_still.xml &ndash;&gt;-->
+<!--<translate xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:fromXDelta="0"       &lt;!&ndash; No movement &ndash;&gt;-->
+<!--    android:toXDelta="0"         &lt;!&ndash; No movement &ndash;&gt;-->
+<!--    android:duration="300"/>     &lt;!&ndash; Duration of the "animation" to match other transitions &ndash;&gt;-->
+<!-- res/anim/stay_still.xml -->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="0"
+    android:toXDelta="0"
+    android:duration="200"/>
+

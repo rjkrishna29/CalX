@@ -17,5 +17,6 @@
     <color name="txtBg">#DEDCDC</color>
     <color name="convertBG">#DEDCDC</color>
     <color name="colour_custom3">#2A2A2A</color>
+    <color name="custom_background">#F6F6F6</color>
 
 </resources>

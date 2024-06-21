@@ -1,4 +1,4 @@
-package com.example.calx;
+package com.paniritabrato.calx;
 
 import android.app.Dialog;
 import android.content.ClipData;
@@ -12,13 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -66,6 +62,7 @@ public class AreaConActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            overridePendingTransition(R.anim.stay_still, R.anim.slide_out_right);
             return true;
         }
         return super.onOptionsItemSelected(item);

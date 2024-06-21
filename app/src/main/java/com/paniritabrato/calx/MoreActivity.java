@@ -1,11 +1,10 @@
-package com.example.calx;
+package com.paniritabrato.calx;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,14 +16,17 @@ public class MoreActivity extends AppCompatActivity {
     public void onNumConvert(View view){
         Intent intent = new Intent(this, NumConActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
     }
     public  void onLenConvert(View view){
         Intent intent = new Intent(this, LenConActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
     }
 public void onAreaConvert(View view){
         Intent intent = new Intent(this, AreaConActivity.class);
         startActivity(intent);
+    overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
 }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public void onAreaConvert(View view){
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish(); // Handle the back button action
+            overridePendingTransition(R.anim.stay_still, R.anim.slide_out_right);
             return true;
         }
         return super.onOptionsItemSelected(item);

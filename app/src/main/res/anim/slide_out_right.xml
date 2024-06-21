@@ -1,0 +1,11 @@
+<!--&lt;!&ndash; res/anim/slide_out_right.xml &ndash;&gt;-->
+<!--<translate xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:fromXDelta="0"       &lt;!&ndash; Start from its original position &ndash;&gt;-->
+<!--    android:toXDelta="100%p"     &lt;!&ndash; Move to the right edge &ndash;&gt;-->
+<!--    android:duration="300"/>     &lt;!&ndash; Duration of the animation in milliseconds &ndash;&gt;-->
+<!-- res/anim/slide_out_right.xml -->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="0"
+    android:toXDelta="100%p"
+    android:duration="200"/>
+

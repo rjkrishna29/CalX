@@ -126,7 +126,7 @@
 
     </style>
 
-    <style name="PopupMenu" parent="ThemeOverlay.AppCompat">
+    <style name="PopupMenu" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">#F6F6F6</item>
     </style>
 <color name="strikeLine">#E7E7E7</color>

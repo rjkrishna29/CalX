@@ -1,4 +1,4 @@
-package com.example.calx;
+package com.paniritabrato.calx;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -83,6 +83,7 @@ public class NumConActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            overridePendingTransition(R.anim.stay_still, R.anim.slide_out_right);
             return true;
         }
         return super.onOptionsItemSelected(item);

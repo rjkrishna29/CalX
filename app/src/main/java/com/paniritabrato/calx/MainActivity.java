@@ -652,8 +652,11 @@
 //    }
 //}
 
-package com.example.calx;
+package com.paniritabrato.calx;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -662,21 +665,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.button.MaterialButton;
+
 import java.util.Stack;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private EditText textView1;
@@ -771,10 +771,15 @@ public class MainActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.menu_settings) {
             Intent settingIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingIntent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
         } else if(item.getItemId()==R.id.menu_more){
             Intent moreIntent = new Intent(this, MoreActivity.class);
             startActivity(moreIntent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
         }
+//        else if (item.getItemId() == R.id.menu_history) {
+//
+//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -788,28 +793,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("checkBack", checkBack);
     }
 
-// public void onDigitClick(View view) {
-//        if (checkClickEqual && !checkBack) {
-//            textView1.setTextSize(42);
-//            textView2.setTextSize(28);
-//            textView1.setTextAppearance(R.style.changeDigit_tv1);
-//            textView2.setTextAppearance(R.style.changeDigit_tv2);
-//            checkClickEqual = false;
-//            textView1.setText("");
-//            textView2.setText("");
-//            checkPercentage = false;
-//        }
-//        MaterialButton button = (MaterialButton) view;
-//        String btnText = button.getText().toString();
-//        String text = textView1.getText().toString();
-//        text += btnText;
-//        textView1.setText(text);
-//        setOp = false;
-//        // Calculate the result and update textView2
-//        double result = calculate(text);
-//        String resultText = Double.toString(result);
-//        textView2.setText(resultText);
-//    }
+
 
     public void onDigitClick(View view) {
         if (checkClickEqual && !checkBack) {
@@ -927,169 +911,9 @@ public class MainActivity extends AppCompatActivity {
         setOp = true;
     }
 
-//    public void onOperatorClick(View view) {
-//        MaterialButton button = (MaterialButton) view;
-//        String btnText = button.getText().toString();
-//        // Get current cursor position
-//        int cursorPosition = textView1.getSelectionStart();
-//        // Get the current text
-//        String currentText = textView1.getText().toString();
-//        if (checkClickEqual) {
-//            checkClickEqual = false;
-//            checkBack = false;
-//            textView1.setTextSize(42);
-//            textView2.setTextSize(28);
-//            textView1.setTextAppearance(R.style.changeDigit_tv1);
-//            textView2.setTextAppearance(R.style.changeDigit_tv2);
-//            currentText = textView2.getText().toString();
-//            cursorPosition = currentText.length(); // Place cursor at the end of the result
-//            textView1.setText(currentText + btnText);
-//            textView2.setText(""); // Clear textView2 for new operation
-//            // Set cursor position to the end of textView1
-//            textView1.setSelection(textView1.getText().length());
-//        } else {
-//            if (currentText.isEmpty() && btnText.equals("−")) {
-//                // Handle the case where a negative sign is being added at the beginning
-//                currentText = "−";
-//            } else if (!currentText.isEmpty()) {
-//                // Insert the operator at the cursor position
-//                String newText = currentText.substring(0, cursorPosition) + btnText + currentText.substring(cursorPosition);
-//                textView1.setText(newText);
-//
-//                // Move the cursor to the right of the inserted operator
-//                cursorPosition++;
-//                textView1.setSelection(cursorPosition);
-//            }
-//        }
-//        setOp = true;
-//        textView2.setText(""); // Clear textView2 for new result
-//    }
-//public void onOperatorClick(View view) {
-//    MaterialButton button = (MaterialButton) view;
-//    String btnText = button.getText().toString();
-//
-//    // Get current cursor position
-//    int cursorPosition = textView1.getSelectionStart();
-//
-//    // Get the current text
-//    String currentText = textView1.getText().toString();
-//
-//    // Check if we're following an equal operation
-//    if (checkClickEqual) {
-//        checkClickEqual = false;
-//        checkBack = false;
-//        textView1.setTextSize(42);
-//        textView2.setTextSize(28);
-//        textView1.setTextAppearance(R.style.changeDigit_tv1);
-//        textView2.setTextAppearance(R.style.changeDigit_tv2);
-//        currentText = textView2.getText().toString();
-//        cursorPosition = currentText.length(); // Place cursor at the end of the result
-//        textView1.setText(currentText + btnText);
-//        textView2.setText(""); // Clear textView2 for new operation
-//        // Set cursor position to the end of textView1
-//        textView1.setSelection(textView1.getText().length());
-//        setOp = true;
-//        return; // Exit method after handling equal operation
-//    }
-//
-//    // Check if current text is empty and button text is "-"
-//    if (currentText.isEmpty() && btnText.equals("−")) {
-//        currentText = "−";
-//    } else if (!currentText.isEmpty()) {
-//        // Check if the cursor is not at the beginning and the previous character is an operator
-//        if (cursorPosition > 0 && isOperator(currentText.charAt(cursorPosition - 1))) {
-//            // Handle replacing the last operator with the new one
-//            char lastChar = currentText.charAt(currentText.length() - 1);
-//            if (lastChar == '+' || lastChar == '−' || lastChar == '×' || lastChar == '÷') {
-//                currentText = currentText.substring(0, currentText.length() - 1) + btnText;
-//            } else {
-//                currentText += btnText;
-//            }
-//        } else {
-//            // Insert the operator at the cursor position
-//            String newText = currentText.substring(0, cursorPosition) + btnText + currentText.substring(cursorPosition);
-//            textView1.setText(newText);
-//        }
-//
-//        // Move the cursor to the right of the inserted operator
-//        cursorPosition++;
-//        textView1.setSelection(cursorPosition);
-//    }
-//
-//    // Set the operator flag
-//    setOp = true;
-//    // Clear textView2 for new result
-//    textView2.setText("");
-//}
-
-
-//    public void onPercentageClick(View view) {
-//        String currentText = textView1.getText().toString();
-//        if (checkClickEqual) {
-//            textView1.setTextSize(42);
-//            textView2.setTextSize(28);
-//            textView1.setTextAppearance(R.style.changeDigit_tv1);
-//            textView2.setTextAppearance(R.style.changeDigit_tv2);
-//            checkClickEqual = false;
-//            currentText = textView2.getText().toString();
-//            textView1.setText(currentText);
-//        }
-//        if (!currentText.isEmpty() && !setOp) {
-//            String text = currentText + "%";
-//            textView1.setText(text);
-//            checkPercentage = true;
-//            // Calculate the result and update textView2
-//            double result = calculate(text);
-//            String resultText = Double.toString(result);
-//            textView2.setText(resultText);
-//        }
-//    }
-// Helper method to check if a character is an operator
 private boolean isOperator(char c) {
     return c == '+' || c == '−' || c == '×' || c == '÷';
 }
-//    public void onPercentageClick(View view) {
-//        String currentText = textView1.getText().toString();
-//        // Check if we're following an equal operation
-//        if (checkClickEqual) {
-//            textView1.setTextSize(42);
-//            textView2.setTextSize(28);
-//            textView1.setTextAppearance(R.style.changeDigit_tv1);
-//            textView2.setTextAppearance(R.style.changeDigit_tv2);
-//            checkClickEqual = false;
-//            currentText = textView2.getText().toString();
-//            textView1.setText(currentText);
-//            // Set cursor position to the end of textView1
-//            textView1.setSelection(textView1.getText().length());
-//        }
-//
-//        // Ensure there is valid text and we are not immediately following an operator
-//        if (!currentText.isEmpty() && !setOp) {
-//            // Get current cursor position
-//            int cursorPosition = textView1.getSelectionStart();
-//            // Check if the cursor is before an operator
-//            if (cursorPosition > 0 && isOperator(currentText.charAt(cursorPosition - 1))) {
-//                // If cursor is before an operator, adjust cursor position
-//                //pass
-//            }else{
-//
-//            // Insert the percentage symbol at the cursor position
-//            String newText = currentText.substring(0, cursorPosition) + "%" + currentText.substring(cursorPosition);
-//
-//            // Update the text in the EditText
-//            textView1.setText(newText);
-//
-//            // Move the cursor to the right of the inserted percentage symbol
-//            textView1.setSelection(cursorPosition + 1);
-//
-//            // Calculate the result and update textView2
-//            double result = calculate(newText);
-//            String resultText = Double.toString(result);
-//            textView2.setText(resultText);
-//        }}
-//
-//
-//    }
 
     public void onPercentageClick(View view) {
         String currentText = textView1.getText().toString();
@@ -1136,7 +960,6 @@ private boolean isOperator(char c) {
             textView2.setText(resultText);
         }
     }
-
 
     public void onEqualClick(View view) {
         String text = textView1.getText().toString();
@@ -1188,29 +1011,6 @@ private boolean isOperator(char c) {
             Toast.makeText(this, "Result is undefined", Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void onBackClick(View view) {
-//        if (checkClickEqual) {
-//            textView1.setTextSize(42);
-//            textView2.setTextSize(28);
-//            textView1.setTextAppearance(R.style.changeDigit_tv1);
-//            textView2.setTextAppearance(R.style.changeDigit_tv2);
-//        }
-//        checkBack = true;
-//        String currentText = textView1.getText().toString();
-//        if (currentText.length() > 0) {
-//            textView1.setText(currentText.substring(0, currentText.length() - 1));
-//            // Calculate the result and update textView2
-//            String newText = textView1.getText().toString();
-//            if (!newText.isEmpty()) {
-//                double result = calculate(newText);
-//                String resultText = Double.toString(result);
-//                textView2.setText(resultText);
-//            } else {
-//                textView2.setText("");
-//            }
-//        }
-//    }
 
     public void onBackClick(View view) {
         if (checkClickEqual) {
@@ -1352,3 +1152,213 @@ private boolean isOperator(char c) {
         numbers.push(result);
     }
 }
+
+//    public void onOperatorClick(View view) {
+//        MaterialButton button = (MaterialButton) view;
+//        String btnText = button.getText().toString();
+//        // Get current cursor position
+//        int cursorPosition = textView1.getSelectionStart();
+//        // Get the current text
+//        String currentText = textView1.getText().toString();
+//        if (checkClickEqual) {
+//            checkClickEqual = false;
+//            checkBack = false;
+//            textView1.setTextSize(42);
+//            textView2.setTextSize(28);
+//            textView1.setTextAppearance(R.style.changeDigit_tv1);
+//            textView2.setTextAppearance(R.style.changeDigit_tv2);
+//            currentText = textView2.getText().toString();
+//            cursorPosition = currentText.length(); // Place cursor at the end of the result
+//            textView1.setText(currentText + btnText);
+//            textView2.setText(""); // Clear textView2 for new operation
+//            // Set cursor position to the end of textView1
+//            textView1.setSelection(textView1.getText().length());
+//        } else {
+//            if (currentText.isEmpty() && btnText.equals("−")) {
+//                // Handle the case where a negative sign is being added at the beginning
+//                currentText = "−";
+//            } else if (!currentText.isEmpty()) {
+//                // Insert the operator at the cursor position
+//                String newText = currentText.substring(0, cursorPosition) + btnText + currentText.substring(cursorPosition);
+//                textView1.setText(newText);
+//
+//                // Move the cursor to the right of the inserted operator
+//                cursorPosition++;
+//                textView1.setSelection(cursorPosition);
+//            }
+//        }
+//        setOp = true;
+//        textView2.setText(""); // Clear textView2 for new result
+//    }
+//public void onOperatorClick(View view) {
+//    MaterialButton button = (MaterialButton) view;
+//    String btnText = button.getText().toString();
+//
+//    // Get current cursor position
+//    int cursorPosition = textView1.getSelectionStart();
+//
+//    // Get the current text
+//    String currentText = textView1.getText().toString();
+//
+//    // Check if we're following an equal operation
+//    if (checkClickEqual) {
+//        checkClickEqual = false;
+//        checkBack = false;
+//        textView1.setTextSize(42);
+//        textView2.setTextSize(28);
+//        textView1.setTextAppearance(R.style.changeDigit_tv1);
+//        textView2.setTextAppearance(R.style.changeDigit_tv2);
+//        currentText = textView2.getText().toString();
+//        cursorPosition = currentText.length(); // Place cursor at the end of the result
+//        textView1.setText(currentText + btnText);
+//        textView2.setText(""); // Clear textView2 for new operation
+//        // Set cursor position to the end of textView1
+//        textView1.setSelection(textView1.getText().length());
+//        setOp = true;
+//        return; // Exit method after handling equal operation
+//    }
+//
+//    // Check if current text is empty and button text is "-"
+//    if (currentText.isEmpty() && btnText.equals("−")) {
+//        currentText = "−";
+//    } else if (!currentText.isEmpty()) {
+//        // Check if the cursor is not at the beginning and the previous character is an operator
+//        if (cursorPosition > 0 && isOperator(currentText.charAt(cursorPosition - 1))) {
+//            // Handle replacing the last operator with the new one
+//            char lastChar = currentText.charAt(currentText.length() - 1);
+//            if (lastChar == '+' || lastChar == '−' || lastChar == '×' || lastChar == '÷') {
+//                currentText = currentText.substring(0, currentText.length() - 1) + btnText;
+//            } else {
+//                currentText += btnText;
+//            }
+//        } else {
+//            // Insert the operator at the cursor position
+//            String newText = currentText.substring(0, cursorPosition) + btnText + currentText.substring(cursorPosition);
+//            textView1.setText(newText);
+//        }
+//
+//        // Move the cursor to the right of the inserted operator
+//        cursorPosition++;
+//        textView1.setSelection(cursorPosition);
+//    }
+//
+//    // Set the operator flag
+//    setOp = true;
+//    // Clear textView2 for new result
+//    textView2.setText("");
+//}
+
+
+//    public void onPercentageClick(View view) {
+//        String currentText = textView1.getText().toString();
+//        if (checkClickEqual) {
+//            textView1.setTextSize(42);
+//            textView2.setTextSize(28);
+//            textView1.setTextAppearance(R.style.changeDigit_tv1);
+//            textView2.setTextAppearance(R.style.changeDigit_tv2);
+//            checkClickEqual = false;
+//            currentText = textView2.getText().toString();
+//            textView1.setText(currentText);
+//        }
+//        if (!currentText.isEmpty() && !setOp) {
+//            String text = currentText + "%";
+//            textView1.setText(text);
+//            checkPercentage = true;
+//            // Calculate the result and update textView2
+//            double result = calculate(text);
+//            String resultText = Double.toString(result);
+//            textView2.setText(resultText);
+//        }
+//    }
+
+
+
+//    public void onBackClick(View view) {
+//        if (checkClickEqual) {
+//            textView1.setTextSize(42);
+//            textView2.setTextSize(28);
+//            textView1.setTextAppearance(R.style.changeDigit_tv1);
+//            textView2.setTextAppearance(R.style.changeDigit_tv2);
+//        }
+//        checkBack = true;
+//        String currentText = textView1.getText().toString();
+//        if (currentText.length() > 0) {
+//            textView1.setText(currentText.substring(0, currentText.length() - 1));
+//            // Calculate the result and update textView2
+//            String newText = textView1.getText().toString();
+//            if (!newText.isEmpty()) {
+//                double result = calculate(newText);
+//                String resultText = Double.toString(result);
+//                textView2.setText(resultText);
+//            } else {
+//                textView2.setText("");
+//            }
+//        }
+//    }
+
+//    public void onPercentageClick(View view) {
+//        String currentText = textView1.getText().toString();
+//        // Check if we're following an equal operation
+//        if (checkClickEqual) {
+//            textView1.setTextSize(42);
+//            textView2.setTextSize(28);
+//            textView1.setTextAppearance(R.style.changeDigit_tv1);
+//            textView2.setTextAppearance(R.style.changeDigit_tv2);
+//            checkClickEqual = false;
+//            currentText = textView2.getText().toString();
+//            textView1.setText(currentText);
+//            // Set cursor position to the end of textView1
+//            textView1.setSelection(textView1.getText().length());
+//        }
+//
+//        // Ensure there is valid text and we are not immediately following an operator
+//        if (!currentText.isEmpty() && !setOp) {
+//            // Get current cursor position
+//            int cursorPosition = textView1.getSelectionStart();
+//            // Check if the cursor is before an operator
+//            if (cursorPosition > 0 && isOperator(currentText.charAt(cursorPosition - 1))) {
+//                // If cursor is before an operator, adjust cursor position
+//                //pass
+//            }else{
+//
+//            // Insert the percentage symbol at the cursor position
+//            String newText = currentText.substring(0, cursorPosition) + "%" + currentText.substring(cursorPosition);
+//
+//            // Update the text in the EditText
+//            textView1.setText(newText);
+//
+//            // Move the cursor to the right of the inserted percentage symbol
+//            textView1.setSelection(cursorPosition + 1);
+//
+//            // Calculate the result and update textView2
+//            double result = calculate(newText);
+//            String resultText = Double.toString(result);
+//            textView2.setText(resultText);
+//        }}
+//
+//
+//    }
+
+
+// public void onDigitClick(View view) {
+//        if (checkClickEqual && !checkBack) {
+//            textView1.setTextSize(42);
+//            textView2.setTextSize(28);
+//            textView1.setTextAppearance(R.style.changeDigit_tv1);
+//            textView2.setTextAppearance(R.style.changeDigit_tv2);
+//            checkClickEqual = false;
+//            textView1.setText("");
+//            textView2.setText("");
+//            checkPercentage = false;
+//        }
+//        MaterialButton button = (MaterialButton) view;
+//        String btnText = button.getText().toString();
+//        String text = textView1.getText().toString();
+//        text += btnText;
+//        textView1.setText(text);
+//        setOp = false;
+//        // Calculate the result and update textView2
+//        double result = calculate(text);
+//        String resultText = Double.toString(result);
+//        textView2.setText(resultText);
+//    }

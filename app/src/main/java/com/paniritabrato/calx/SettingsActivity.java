@@ -1,8 +1,7 @@
-package com.example.calx;
+package com.paniritabrato.calx;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.service.voice.VoiceInteractionSession;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
@@ -37,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish(); // Handle the back button action
+            overridePendingTransition(R.anim.stay_still, R.anim.slide_out_right);
             return true;
         }
         return super.onOptionsItemSelected(item);

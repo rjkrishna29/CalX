@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.calx"
+    namespace = "com.paniritabrato.calx"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.calx"
+        applicationId = "com.paniritabbrato.calx"
         minSdk = 28
         targetSdk = 34
-        versionCode = 6
-        versionName = "1.5.0"
+        versionCode = 7
+        versionName = "1.5.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,4 +40,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(kotlin("script-runtime"))
 }

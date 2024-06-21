@@ -1,4 +1,4 @@
-package com.example.calx;
+package com.paniritabrato.calx;
 
 import android.content.Context;
 

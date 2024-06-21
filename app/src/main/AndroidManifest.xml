@@ -13,27 +13,27 @@
         android:theme="@style/Theme.CalX"
         tools:targetApi="31">
         <activity
-            android:name=".AreaConActivity"
+            android:name="com.paniritabrato.calx.AreaConActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".LenConActivity"
+            android:name="com.paniritabrato.calx.LenConActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NumConActivity"
+            android:name="com.paniritabrato.calx.NumConActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MoreActivity"
+            android:name="com.paniritabrato.calx.MoreActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.paniritabrato.calx.SettingsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.paniritabrato.calx.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait">
