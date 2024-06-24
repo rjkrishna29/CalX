@@ -58,7 +58,7 @@
                 android:textIsSelectable="true"
                 android:inputType="none"
                 android:paddingLeft="5dp"
-                android:textSize="24sp" />
+                android:textSize="24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +92,7 @@
                 android:onClick="onBinClick"
                 android:inputType="none"
                 android:paddingLeft="5dp"
-                android:textSize="24sp" />
+                android:textSize="24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,7 +126,7 @@
                 android:onClick="onOctClick"
                 android:inputType="none"
                 android:paddingLeft="5dp"
-                android:textSize="24sp" />
+                android:textSize="24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -160,7 +160,7 @@
                 android:onClick="onHexClick"
                 android:inputType="none"
                 android:paddingLeft="5dp"
-                android:textSize="24sp" />
+                android:textSize="24dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -338,7 +338,7 @@
                 android:onClick="onEqualClick"
                 android:paddingTop="5dp"
                 android:text="="
-                android:textSize="40sp"
+                android:textSize="40dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -357,12 +357,12 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSign"
         style="@style/signButton"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:gravity="start"
         android:onClick="onSignClick"
         android:text="+/-"
-        android:layout_height="50dp"
-        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutVertical"
         app:layout_constraintStart_toStartOf="parent" />
 

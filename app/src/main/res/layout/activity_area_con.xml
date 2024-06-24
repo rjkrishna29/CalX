@@ -64,7 +64,7 @@
             android:textColor="@color/btnBackground2"
             android:textIsSelectable="true"
             android:gravity="center"
-            android:textSize="22sp"/>
+            android:textSize="22dp"/>
     </LinearLayout>
     <LinearLayout
         style="@style/lenConvertPage"
@@ -109,7 +109,7 @@
             android:textIsSelectable="true"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:textSize="22sp"/>
+            android:textSize="22dp"/>
     </LinearLayout>
 
 
@@ -247,12 +247,12 @@
                 android:id="@+id/btnEqual"
                 style="@style/operatorButton"
                 android:layout_width="154dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal|top"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:onClick="onEqualClick"
                 android:paddingTop="5dp"
                 android:text="="
-                android:textSize="40sp"
+                android:textSize="40dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

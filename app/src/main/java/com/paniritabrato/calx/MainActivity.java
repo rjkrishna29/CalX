@@ -662,30 +662,39 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.button.MaterialButton;
-
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
     private EditText textView1;
     // private TextView textView1;
     private TextView textView2;
+    private LinearLayout digitLayout;
+    private ListView historyView;
+    private MaterialButton historyBtn,calcBtn,clrHisBtn;
+    private ArrayAdapter<String> historyAdapter;
+    private ArrayList<String> historyList;
     private boolean setOp = true;
     private boolean checkPercentage = false;
     private boolean checkClickEqual = false;
     private boolean checkBack = false;
+    private boolean historyClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -695,6 +704,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
+        historyView =  findViewById(R.id.historyView);
+        calcBtn=  findViewById(R.id.btnCalc);
+        digitLayout = findViewById(R.id.linearLayout1);
+        historyBtn = findViewById(R.id.btnHistory);
+        clrHisBtn = findViewById(R.id.btnHisClr);
+        // Initialize history list and adapter
+        historyList = new ArrayList<>();
+        historyAdapter = new ArrayAdapter<>(this, R.layout.list_item_history, historyList);
+        // Set adapter to ListView
+        historyView.setAdapter(historyAdapter);
         // to show the menubar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -704,7 +723,6 @@ public class MainActivity extends AppCompatActivity {
         }
         // Suppress the soft keyboard from appearing
         textView1.setShowSoftInputOnFocus(false);
-
         // Add listener to handle hiding the keyboard when EditText gains focus
         textView1.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -740,6 +758,46 @@ public class MainActivity extends AppCompatActivity {
             checkPercentage = savedInstanceState.getBoolean("checkPercentage");
             checkBack = savedInstanceState.getBoolean("checkBack");
         }
+
+        historyView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedValue = historyList.get(position);
+                int equalIndex = selectedValue.indexOf("=");
+                if (equalIndex != -1) {
+                    String valueAfterEqual = selectedValue.substring(equalIndex + 1).trim();
+                    if (checkClickEqual || textView1.getText().toString().isEmpty() || historyClick) {
+                        textView1.setTextSize(40);
+                        textView2.setTextSize(24);
+                        textView1.setTextAppearance(R.style.changeDigit_tv1);
+                        textView2.setTextAppearance(R.style.changeDigit_tv2);
+                        // Reset the state
+                        checkClickEqual = false;
+                        // Clear textView1 and textView2
+                        textView1.setText(valueAfterEqual);
+                        textView2.setText("");
+                        // Set the cursor at the end of the new text
+                        textView1.setSelection(textView1.getText().length());
+                    } else {
+                        int cursorPosition = textView1.getSelectionStart();
+                        String currentText = textView1.getText().toString();
+                        // Insert valueAfterEqual at the current cursor position
+                        String newText = currentText.substring(0, cursorPosition) + valueAfterEqual + currentText.substring(cursorPosition);
+                        // Set the new text to textView1
+                        textView1.setText(newText);
+                        // Move the cursor to the end of the inserted text
+                        textView1.setSelection(cursorPosition + valueAfterEqual.length());
+                    }
+                    // Indicate that a history item was clicked
+                    historyClick = true;
+                }
+                String newText = textView1.getText().toString();
+                double result = calculate(newText);
+                //String resultText = Double.toString(result);
+                String t = formatResult(result); // Format the result to remove trailing zeros
+                textView2.setText(t);
+            }
+        });
     }
 
     private void hideKeyboard() {
@@ -751,9 +809,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
-        // getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        MenuItem item = menu.findItem(R.id.menu_settings);
+//        SpannableString s = new SpannableString(item.getTitle());
+//        s.setSpan(new BackgroundColorSpan(getResources().getColor(R.color.custom_background)), 0, s.length(), 0);
+//        item.setTitle(s);
         return true;
     }
 
@@ -772,14 +832,12 @@ public class MainActivity extends AppCompatActivity {
             Intent settingIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingIntent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
-        } else if(item.getItemId()==R.id.menu_more){
+        }
+        else if(item.getItemId()==R.id.menu_more){
             Intent moreIntent = new Intent(this, MoreActivity.class);
             startActivity(moreIntent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.stay_still);
         }
-//        else if (item.getItemId() == R.id.menu_history) {
-//
-//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -793,12 +851,34 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("checkBack", checkBack);
     }
 
-
+    public void onHistoryClick(View view) {
+        if (historyView.getVisibility() == View.GONE) {
+            // Animation to slide in from the left
+            Animation slideInLeft = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
+            historyView.startAnimation(slideInLeft);
+            // When historyView is not visible, show it and hide digitLayout
+            historyView.setVisibility(View.VISIBLE);
+            digitLayout.setVisibility(View.GONE);
+            historyBtn.setVisibility(View.INVISIBLE); // Hide historyBtn
+            calcBtn.setVisibility(View.VISIBLE); // Show calcBtn
+            clrHisBtn.setVisibility(View.VISIBLE);
+        } else {
+            // Animation to slide out to the left
+            Animation slideOutLeft = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
+            historyView.startAnimation(slideOutLeft);
+            // When historyView is visible, hide it and show digitLayout
+            historyView.setVisibility(View.GONE);
+            digitLayout.setVisibility(View.VISIBLE);
+            historyBtn.setVisibility(View.VISIBLE); // Show historyBtn
+            calcBtn.setVisibility(View.INVISIBLE); // Hide calcBtn
+            clrHisBtn.setVisibility(View.INVISIBLE);
+        }
+    }
 
     public void onDigitClick(View view) {
-        if (checkClickEqual && !checkBack) {
-            textView1.setTextSize(42);
-            textView2.setTextSize(28);
+        if (checkClickEqual) {
+            textView1.setTextSize(40);
+            textView2.setTextSize(24);
             textView1.setTextAppearance(R.style.changeDigit_tv1);
             textView2.setTextAppearance(R.style.changeDigit_tv2);
             checkClickEqual = false;
@@ -806,31 +886,25 @@ public class MainActivity extends AppCompatActivity {
             textView2.setText("");
             checkPercentage = false;
         }
-
         MaterialButton button = (MaterialButton) view;
         String btnText = button.getText().toString();
-
         // Get current cursor position
         int cursorPosition = textView1.getSelectionStart();
-
         // Get the current text
         String currentText = textView1.getText().toString();
-
         // Insert the digit at the cursor position
         String newText = currentText.substring(0, cursorPosition) + btnText + currentText.substring(cursorPosition);
-
         // Update the text in the EditText
         textView1.setText(newText);
-
         // Move the cursor to the right of the inserted digit
         textView1.setSelection(cursorPosition + 1);
-
         setOp = false;
-
         // Calculate the result and update textView2
         double result = calculate(newText);
-        String resultText = Double.toString(result);
-        textView2.setText(resultText);
+        //String resultText = Double.toString(result);
+        String t = formatResult(result); // Format the result to remove trailing zeros
+        textView2.setText(t);
+        historyClick=false;
     }
 
     public void onOperatorClick(View view) {
@@ -840,8 +914,8 @@ public class MainActivity extends AppCompatActivity {
         if (checkClickEqual) {
             checkClickEqual = false;
             checkBack = false;
-            textView1.setTextSize(42);
-            textView2.setTextSize(28);
+            textView1.setTextSize(40);
+            textView2.setTextSize(24);
             textView1.setTextAppearance(R.style.changeDigit_tv1);
             textView2.setTextAppearance(R.style.changeDigit_tv2);
             // Update currentText from textView2's result
@@ -853,7 +927,6 @@ public class MainActivity extends AppCompatActivity {
             currentText = textView1.getText().toString();
             int cursorPosition = textView1.getSelectionStart();
             int length = textView1.getText().length();
-
             if (cursorPosition == length) {
                 // Cursor is at the end
                 if (currentText.isEmpty() && btnText.equals("−")) {
@@ -909,19 +982,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         setOp = true;
+        historyClick=false;
     }
 
-private boolean isOperator(char c) {
-    return c == '+' || c == '−' || c == '×' || c == '÷';
-}
+
 
     public void onPercentageClick(View view) {
         String currentText = textView1.getText().toString();
-
         // Handle the case if we just completed an operation with "="
         if (checkClickEqual) {
-            textView1.setTextSize(42);
-            textView2.setTextSize(28);
+            textView1.setTextSize(40);
+            textView2.setTextSize(24);
             textView1.setTextAppearance(R.style.changeDigit_tv1);
             textView2.setTextAppearance(R.style.changeDigit_tv2);
             checkClickEqual = false;
@@ -930,12 +1001,10 @@ private boolean isOperator(char c) {
             // Set cursor position to the end of textView1
             textView1.setSelection(textView1.getText().length());
         }
-
         // Ensure there is valid text
         if (!currentText.isEmpty()) {
             // Get current cursor position
             int cursorPosition = textView1.getSelectionStart();
-
             // Check if the cursor is immediately before an operator
             if (cursorPosition > 0) {
                 char prevChar = currentText.charAt(cursorPosition - 1);
@@ -944,49 +1013,78 @@ private boolean isOperator(char c) {
                     return;
                 }
             }
-
             // Insert the percentage symbol at the cursor position
             String newText = currentText.substring(0, cursorPosition) + "%" + currentText.substring(cursorPosition);
-
             // Update the text in textView1
             textView1.setText(newText);
-
             // Move the cursor to the right of the inserted percentage symbol
             textView1.setSelection(cursorPosition + 1);
-
             // Calculate the result and update textView2
             double result = calculate(newText);
-            String resultText = Double.toString(result);
-            textView2.setText(resultText);
+            //String resultText = Double.toString(result);
+            String t = formatResult(result); // Format the result to remove trailing zeros
+            textView2.setText(t);
         }
+        historyClick=false;
     }
 
     public void onEqualClick(View view) {
         String text = textView1.getText().toString();
         double result = calculate(text);
-        String t = Double.toString(result);
-        textView2.setTextSize(42);
-        textView1.setTextSize(28);
+        String t = formatResult(result); // Format the result to remove trailing zeros
+        textView2.setTextSize(40);
+        textView1.setTextSize(24);
         textView1.setTextAppearance(R.style.changeDigit_tv2);
         textView2.setTextAppearance(R.style.changeDigit_tv1);
         textView2.setText(t);
         checkClickEqual = true;
         // Set cursor position to the end of textView1
         textView1.setSelection(textView1.getText().length());
+        // Check if textView2 contains "NaN"
+        if (!textView2.getText().toString().equals("NaN")) {
+            // For demonstration, using the input as result
+            String s1 = textView1.getText().toString() + "\n=" + textView2.getText().toString();
+            // Add result to history list
+            addToHistory(s1);
+        }
+        historyClick=false;
     }
 
-//    public void onACClick(View view) {
-//        textView1.setText("");
-//        textView2.setText("");
-//        checkPercentage = false;
-//    }
+    private String formatResult(double result) {
+        // Convert the result to string
+        String resultString = Double.toString(result);
+        // Check if it contains a decimal point
+        if (resultString.contains(".")) {
+            // Remove trailing zeros after the decimal point
+            resultString = resultString.replaceAll("0*$", "");
+            // Remove the decimal point if it's now at the end
+            resultString = resultString.replaceAll("\\.$", "");
+        }
+        return resultString;
+    }
+
+    // Add result to history and ensure the list doesn't exceed 10 items
+    private void addToHistory(String result) {
+
+        if (historyList.size() >= 10) {
+            historyList.remove(0); // Remove the oldest item
+        }
+        historyList.add(result);
+        historyAdapter.notifyDataSetChanged();
+
+    }
 
     public void onACClick(View view) {
+            textView2.setTextSize(40);
+            textView1.setTextSize(24);
+            textView1.setTextAppearance(R.style.changeDigit_tv2);
+            textView2.setTextAppearance(R.style.changeDigit_tv1);
         textView1.setText("");
         textView2.setText("");
         checkPercentage = false;
         // Reset cursor position to the start
         textView1.setSelection(textView1.getText().length());
+        historyClick=true;
     }
 
     public void onCopyClick(View view) {
@@ -995,7 +1093,6 @@ private boolean isOperator(char c) {
         String copy3;
         if (!copy1.isEmpty() && !copy2.equals("NaN")) {
             copy3 = copy1 + " = " + copy2;
-
             // Get the clipboard system service
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             if (clipboard != null) {
@@ -1014,74 +1111,70 @@ private boolean isOperator(char c) {
 
     public void onBackClick(View view) {
         if (checkClickEqual) {
-            textView1.setTextSize(42);
-            textView2.setTextSize(28);
+            textView1.setTextSize(40);
+            textView2.setTextSize(24);
             textView1.setTextAppearance(R.style.changeDigit_tv1);
             textView2.setTextAppearance(R.style.changeDigit_tv2);
         }
         checkBack = true;
-
         // Get current cursor position
         int cursorPosition = textView1.getSelectionStart();
-
         // Get the current text
         String currentText = textView1.getText().toString();
-
         // Check if there's any text to remove
         if (currentText.length() > 0 && cursorPosition > 0) {
             // Remove the character at the cursor position
             String newText = currentText.substring(0, cursorPosition - 1) + currentText.substring(cursorPosition);
             textView1.setText(newText);
-
             // Move the cursor to the left of the removed character
             textView1.setSelection(cursorPosition - 1);
-
             // Update the result in textView2
             if (textView1.getText().toString().isEmpty()){
                 textView2.setText("");
            }
             else{
             double result = calculate(newText);
-            String resultText = Double.toString(result);
-            textView2.setText(resultText);
+                String t = formatResult(result);
+                textView2.setText(t);
             }
         }
     }
 
     public static double calculate(String expression) {
         try {
+            // Preprocess the expression to handle implicit multiplication
+            expression = addImplicitMultiplications(expression);
             Stack<Double> numbers = new Stack<>();
             Stack<Character> operators = new Stack<>();
-            boolean isNegative = false; // Flag to track negative numbers
+            boolean isNegative = false;
             for (int i = 0; i < expression.length(); i++) {
                 char ch = expression.charAt(i);
                 if (Character.isDigit(ch) || ch == '.') {
                     StringBuilder numBuilder = new StringBuilder();
-                    if (isNegative) { // If the number is negative, append the negative sign
+                    if (isNegative) {
                         numBuilder.append('-');
-                        isNegative = false; // Reset the flag
+                        isNegative = false;
                     }
                     while (i < expression.length() && (Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.')) {
                         numBuilder.append(expression.charAt(i));
                         i++;
                     }
-                    i--; // Move back one character to account for the extra increment in the loop
-                    double num = Double.parseDouble(numBuilder.toString());
-                    numbers.push(num);
+                    i--; // Adjust for the extra increment
+                    numbers.push(Double.parseDouble(numBuilder.toString()));
                 } else if (ch == '×' || ch == '÷') {
                     while (!operators.isEmpty() && (operators.peek() == '×' || operators.peek() == '÷')) {
                         performOperation(numbers, operators);
                     }
                     operators.push(ch);
-                } else if (ch == '+' || ch == '−'|| ch == '-') {
-                    if (i == 0 || expression.charAt(i - 1) == '(') { // Handle negative numbers
-                        isNegative = true; // Set the flag for negative numbers
-                        continue; // Skip further processing in this iteration
+                } else if (ch == '+' || ch == '−' || ch == '-') {
+                    if (i == 0 || isOperator(expression.charAt(i - 1)) || expression.charAt(i - 1) == '(') {
+                        isNegative = true;
+                    } else {
+                        while (!operators.isEmpty() && "+−-×÷".indexOf(operators.peek()) != -1) {
+                            performOperation(numbers, operators);
+                        }
+                        operators.push(ch);
                     }
-                    while (!operators.isEmpty() && (operators.peek() == '×' || operators.peek() == '÷' || operators.peek() == '+' || operators.peek() == '−' || operators.peek() == '-')) {
-                        performOperation(numbers, operators);
-                    }
-                    operators.push(ch);
                 } else if (ch == '%') {
                     if (!numbers.isEmpty()) {
                         double percentValue = numbers.pop() / 100;
@@ -1092,9 +1185,8 @@ private boolean isOperator(char c) {
                                 nextNumBuilder.append(expression.charAt(i));
                                 i++;
                             }
-                            i--; // Move back to adjust for the next iteration
-                            double nextNum = Double.parseDouble(nextNumBuilder.toString());
-                            numbers.push(percentValue * nextNum);
+                            i--; // Adjust for the extra increment
+                            numbers.push(percentValue * Double.parseDouble(nextNumBuilder.toString()));
                         } else {
                             numbers.push(percentValue);
                         }
@@ -1105,25 +1197,47 @@ private boolean isOperator(char c) {
                     while (!operators.isEmpty() && operators.peek() != '(') {
                         performOperation(numbers, operators);
                     }
-                    if (operators.isEmpty() || operators.peek() != '(') {
+                    if (!operators.isEmpty() && operators.peek() == '(') {
+                        operators.pop(); // Remove the '('
+                    } else {
                         throw new IllegalArgumentException("Invalid expression: mismatched parentheses");
                     }
-                    operators.pop();
                 }
             }
+
             while (!operators.isEmpty()) {
                 performOperation(numbers, operators);
             }
+
             return numbers.pop();
         } catch (Exception e) {
             e.printStackTrace();
-            return Double.NaN; // Return 0.0 in case of any exception
+            return Double.NaN;
         }
+    }
+
+    private static String addImplicitMultiplications(String expression) {
+        StringBuilder result = new StringBuilder();
+        char prevChar = ' ';
+        for (int i = 0; i < expression.length(); i++) {
+            char currChar = expression.charAt(i);
+            // Check for a number followed by '('
+            if (Character.isDigit(prevChar) && currChar == '(') {
+                result.append('×');
+            }
+            // Check for ')' followed by a number or '('
+            else if (prevChar == ')' && (Character.isDigit(currChar) || currChar == '(')) {
+                result.append('×');
+            }
+            result.append(currChar);
+            prevChar = currChar;
+        }
+        return result.toString();
     }
 
     private static void performOperation(Stack<Double> numbers, Stack<Character> operators) {
         if (numbers.size() < 2) {
-            throw new IllegalArgumentException("Invalid expression");
+            throw new IllegalArgumentException("Invalid expression: insufficient numbers");
         }
         double b = numbers.pop();
         double a = numbers.pop();
@@ -1151,7 +1265,18 @@ private boolean isOperator(char c) {
         }
         numbers.push(result);
     }
+    private static boolean isOperator(char ch) {
+        return ch == '+' || ch == '−' || ch == '-' || ch == '×' || ch == '÷';
+    }
+
+    public void onClearHistoryClick(View view) {
+        // Clear the historyList
+        historyList.clear();
+        // Notify the adapter that the data set has changed
+        historyAdapter.notifyDataSetChanged();
+    }
 }
+
 
 //    public void onOperatorClick(View view) {
 //        MaterialButton button = (MaterialButton) view;

@@ -65,7 +65,7 @@
                     android:onClick="onNumConvert"
                     android:background="@android:color/transparent"
                     android:text="Number"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -93,7 +93,7 @@
                         android:onClick="onLenConvert"
                         android:background="@android:color/transparent"
                         android:text="Length"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
             </LinearLayout>
@@ -125,7 +125,7 @@
                         android:onClick="onAreaConvert"
                         android:background="@android:color/transparent"
                         android:text="Area"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

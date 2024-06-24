@@ -4,4 +4,5 @@
 <color name="convertBG">#000C0A0A</color>
     <color name="colour_custom3">#E0E0E0</color>
     <color name="custom_background">@color/black</color>
+    <color name="iconTintColor">#F6F6F6</color>
 </resources>
