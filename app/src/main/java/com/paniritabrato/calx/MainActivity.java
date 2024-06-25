@@ -697,6 +697,19 @@ public class MainActivity extends AppCompatActivity {
     private boolean historyClick = false;
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the current state of historyList and other UI states
+        outState.putStringArrayList("historyList", new ArrayList<>(historyList));
+        outState.putString("textView1", textView1.getText().toString());
+        outState.putString("textView2", textView2.getText().toString());
+        outState.putBoolean("checkClickEqual", checkClickEqual);
+        outState.putBoolean("checkPercentage", checkPercentage);
+        outState.putBoolean("checkBack", checkBack);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -709,11 +722,7 @@ public class MainActivity extends AppCompatActivity {
         digitLayout = findViewById(R.id.linearLayout1);
         historyBtn = findViewById(R.id.btnHistory);
         clrHisBtn = findViewById(R.id.btnHisClr);
-        // Initialize history list and adapter
-        historyList = new ArrayList<>();
-        historyAdapter = new ArrayAdapter<>(this, R.layout.list_item_history, historyList);
-        // Set adapter to ListView
-        historyView.setAdapter(historyAdapter);
+
         // to show the menubar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -757,7 +766,17 @@ public class MainActivity extends AppCompatActivity {
             checkClickEqual = savedInstanceState.getBoolean("checkClickEqual");
             checkPercentage = savedInstanceState.getBoolean("checkPercentage");
             checkBack = savedInstanceState.getBoolean("checkBack");
+            historyList = savedInstanceState.getStringArrayList("historyList");
+            if (historyList == null) {
+                historyList = new ArrayList<>(); // Initialize if null
+            }
+        } else {
+            historyList = new ArrayList<>(); // Initialize if savedInstanceState is null
         }
+        // Initialize history adapter with the restored historyList
+        historyAdapter = new ArrayAdapter<>(this, R.layout.list_item_history, historyList);
+        // Set adapter to ListView
+        historyView.setAdapter(historyAdapter);
 
         historyView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -841,15 +860,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("textView1", textView1.getText().toString());
-        outState.putString("textView2", textView2.getText().toString());
-        outState.putBoolean("checkClickEqual", checkClickEqual);
-        outState.putBoolean("checkPercentage", checkPercentage);
-        outState.putBoolean("checkBack", checkBack);
-    }
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putString("textView1", textView1.getText().toString());
+//        outState.putString("textView2", textView2.getText().toString());
+//        outState.putBoolean("checkClickEqual", checkClickEqual);
+//        outState.putBoolean("checkPercentage", checkPercentage);
+//        outState.putBoolean("checkBack", checkBack);
+//
+//    }
 
     public void onHistoryClick(View view) {
         if (historyView.getVisibility() == View.GONE) {
@@ -984,8 +1004,6 @@ public class MainActivity extends AppCompatActivity {
         setOp = true;
         historyClick=false;
     }
-
-
 
     public void onPercentageClick(View view) {
         String currentText = textView1.getText().toString();
