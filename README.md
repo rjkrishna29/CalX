@@ -56,7 +56,7 @@ The Calculator App is a user-friendly tool designed for quick and efficient calc
 - You can also copy the input and result by long-clicking on them.
 - Click on the History button to view the recent 10 operations performed.
 ### 2. More Action Button
-      Access additional functionalities through the widget button, offering multiple other operations for advanced calculations.
+Access additional functionalities through the widget button, offering multiple other operations for advanced calculations.
 ### 3. Number Conversion
 - **More Actions Page:** These features are available under the "More Actions" page.
 - **Number System Entry:** Users can click on Bin (Binary), Dec (Decimal), Oct (Octal), or Hex (Hexadecimal) to enter numbers in their respective formats.
@@ -70,7 +70,7 @@ The Calculator App is a user-friendly tool designed for quick and efficient calc
     
 
 ## **Development**
-    I built this app using Android Studio and used Java for the backend.
+I built this app using Android Studio and used Java for the backend.
     
  
 
