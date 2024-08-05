@@ -70,7 +70,12 @@ Access additional functionalities through the widget button, offering multiple o
     
 
 ## **Development**
-I built this app using Android Studio and used Java for the backend.
+Android Studio and Java for the backend is being used for this app.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
     
  
 
