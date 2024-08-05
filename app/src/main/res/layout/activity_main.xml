@@ -31,7 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/constraint_layout"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintHeight_percent="0.2"> <!-- Occupies 50% of the remaining height -->
+        app:layout_constraintHeight_percent="0.27"
+        android:layout_marginBottom="25dp"> <!-- Occupies 50% of the remaining height -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,21 +105,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.73">
-            <!-- Your content here -->
 
 
             <LinearLayout
                 android:id="@+id/linearLayoutHorizontal1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAC"
                     style="@style/digitButton2"
-                    android:onClick="onACClick"
                     android:layout_gravity="center_vertical"
+                    android:baselineAligned="false"
+                    android:onClick="onACClick"
                     android:text="AC"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -258,12 +259,12 @@
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:gravity="start"
             android:orientation="vertical"
-            android:gravity="left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.24">
+            app:layout_constraintWidth_percent="0.25">
             <!-- Your content here -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDiv"

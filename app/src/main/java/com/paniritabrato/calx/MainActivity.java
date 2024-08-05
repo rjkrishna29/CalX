@@ -658,9 +658,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -674,10 +678,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -758,6 +768,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         textView1.setSelection(0);
+        loadHistory();
         //EdgeToEdge.enable(this);
         // Restore the saved state if available
         if (savedInstanceState != null) {
@@ -825,7 +836,20 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
 
+        Resources res = newBase.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration config = res.getConfiguration();
+
+        // Set the densityDpi to a standard value (e.g., 420 which is the densityDpi for a "normal" display size)
+        config.densityDpi = 480; // Adjust this value to the "standard" density you want
+        // Lock font scale to 1.0
+        config.fontScale = 1.0f;
+        res.updateConfiguration(config, dm);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -865,7 +889,7 @@ public class MainActivity extends AppCompatActivity {
 //        super.onSaveInstanceState(outState);
 //        outState.putString("textView1", textView1.getText().toString());
 //        outState.putString("textView2", textView2.getText().toString());
-//        outState.putBoolean("checkClickEqual", checkClickEqual);
+//        outState.putBoolean("check ClickEqual", checkClickEqual);
 //        outState.putBoolean("checkPercentage", checkPercentage);
 //        outState.putBoolean("checkBack", checkBack);
 //
@@ -1091,6 +1115,28 @@ public class MainActivity extends AppCompatActivity {
         historyAdapter.notifyDataSetChanged();
 
     }
+
+    private void saveHistory() {
+        SharedPreferences sharedPreferences = getSharedPreferences("CalcHistory", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(historyList);
+        editor.putString("historyList", json);
+        editor.apply();
+    }
+
+
+    private void loadHistory() {
+        SharedPreferences sharedPreferences = getSharedPreferences("CalcHistory", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("historyList", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        historyList = gson.fromJson(json, type);
+        if (historyList == null) {
+            historyList = new ArrayList<>();
+        }
+    }
+
 
     public void onACClick(View view) {
             textView2.setTextSize(40);
