@@ -35,8 +35,6 @@ CalX is packed with features to make your calculations seamless and efficient.
 
 ## 📸 Screenshots
 
-<details>
-<summary><b>Click here to view App Screenshots</b></summary>
 <br>
   
 | Light Mode UI | Dark Mode UI | History |
@@ -51,7 +49,7 @@ CalX is packed with features to make your calculations seamless and efficient.
 | :---: | :---: | :---: |
 | <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/2c2abbe0-1784-4f79-979f-09af8d771dae" width="250"> | <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/0b924961-1c39-459a-86e4-092ab0a0e0aa" width="250"> | <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/535dbf4f-0383-4203-b836-08697f09aa07" width="250"> |
 
-</details>
+
 
 ---
 
