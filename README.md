@@ -1,10 +1,6 @@
 # CalX 🔢
 
 <p align="center">
-  <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/e7509142-c4bc-4073-b572-0619534c1be5" alt="CalX Hero Image" width="50%">
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/Android-9.0%2B-green.svg" alt="Platform">
   <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License">
   <img src="https://img.shields.io/badge/Maintained%3F-Yes-brightgreen.svg" alt="Maintained">
