@@ -1,6 +1,8 @@
 # CalX 🔢
 
-![CalX Hero Image](https://github.com/rjkrishna29/CalX_apk/assets/170453157/e7509142-c4bc-4073-b572-0619534c1be5)
+<p align="center">
+  <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/e7509142-c4bc-4073-b572-0619534c1be5" alt="CalX Hero Image" width="50%">
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Android-9.0%2B-green.svg" alt="Platform">
@@ -55,30 +57,6 @@ CalX is packed with features to make your calculations seamless and efficient.
 
 </details>
 
-
-
-<details>
-  <summary><b>Click here to view App Screenshots</b></summary>
-  <p align="center">
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/e7509142-c4bc-4073-b572-0619534c1be5" alt="Light Mode UI" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/cdbb389b-b08e-47f9-a80d-6c1475085998" alt="Dark Mode UI" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/5f683f01-6bd1-4203-8fd4-c7dda168d6d5" alt="History" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/4c19b4ec-7aab-4581-86b9-596ac3a3e8c7" alt="Converters Menu" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/b96b0fbd-a1b4-4596-9ac8-69d086cf07db" alt="Number System" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/aa5dab18-60c6-482e-8855-19cfecfbe014" alt="Length Converter" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/2c2abbe0-1784-4f79-979f-09af8d771dae" alt="Area Converter 1" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/f324c62b-199c-47b8-bf78-74c1b35c972f" alt="Area Converter 2" width="300">
-    <br><br>
-    <img src="https://github.com/rjkrishna29/CalX_apk/assets/170453157/0b924961-1c39-459a-86e4-092ab0a0e0aa" alt="Copy Functionality" width="300">
-  </p>
-</details>
 ---
 
 ## 🛠️ Tech Stack & Tools
